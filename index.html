@@ -1,24 +1,48 @@
-<script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>Pokémon Cristal NFC</title>
+    <style>
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: black; }
+        #game { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; }
+        
+        /* Controles grandes para móvil en vertical */
+        @media (orientation: portrait) {
+            .ejs-touch-controls {
+                transform: scale(1.6) !important;
+                transform-origin: bottom center !important;
+                bottom: 20px !important;
+                width: 100% !important;
+            }
+            #canvas-touch-dpad { left: 10px !important; bottom: 10px !important; }
+            #canvas-touch-buttons { right: 10px !important; bottom: 10px !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game"></div>
+
+    <script>
         EJS_player = '#game';
-        EJS_biosUrl = ''; 
-        EJS_gameUrl = 'Pokemon - Edicion Cristal (Spain).gbc'; // Tu archivo .gbc
+        EJS_gameUrl = 'Pokemon - Edicion Cristal (Spain).gbc'; // Revisa que se llame EXACTAMENTE así en tu GitHub
         EJS_core = 'gbc'; 
         EJS_pathtodata = 'data/'; 
         EJS_startOnLoaded = true;
 
-        // Ajustes obligatorios para móviles y guardado
+        // Ajustes para controles grandes y guardado local
         EJS_AdPhant_MobileGamepad = true;
         EJS_mouse = false;
         EJS_GamepadOpacity = "0.75";
         EJS_scaleControls = true;
-        EJS_forceLocalSave = true; 
+        EJS_forceLocalSave = true;
 
-        // --- SOLUCIÓN DE REINICIOS (PARCHE RELOJ RETROARCH) ---
-        EJS_gameID = "pokemon_crystal_spain"; // Forzar ID limpio en memoria
-        EJS_settings = {
-            "gambatte_gb_hwmode": "GBC",
-            "gambatte_gb_bootrom": "disabled",
-            "gambatte_gb_link_mode": "disabled",
-            "gambatte_rtc_mode": "system" // Vincula el reloj al navegador directamente sin crear archivos extras
-        };
+        // --- COMANDO DE COMPATIBILIDAD INTEGRAL ---
+        EJS_biosUrl = ''; // Al dejar las BIOS vacías en GBC, el emulador no intenta simular el hardware estricto y arranca la ROM de forma directa, evitando el bucle de reinicios.
     </script>
+
+    <script src="data/loader.js"></script>
+</body>
+</html>
